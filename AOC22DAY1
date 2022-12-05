@@ -49,21 +49,44 @@ for(int z = 0; z < length; ++z)
         total += array[i];
         if(array[i] == 0)
         {
-          if(currentmaximum < total)
+          if(currentmaximum <= total)
           {
+            thirdhighest = secondhighest;
+            secondhighest = currentmaximum;
             currentmaximum = total;
+            
           }
-          else if(secondhighest < total)
+          else if(secondhighest <= total)
           {
+            thirdhighest = secondhighest;
             secondhighest = total;
           }
-          else if(thirdhighest < total)
+          else if(thirdhighest <= total)
           {
             thirdhighest = total;
           }
           total = 0;
         }
-      
+        else if(i == length -1)
+        {
+          if(currentmaximum <= total)
+          {
+            thirdhighest = secondhighest;
+            secondhighest = currentmaximum;
+            currentmaximum = total;
+            
+          }
+          else if(secondhighest <= total)
+          {
+            thirdhighest = secondhighest;
+            secondhighest = total;
+          }
+          else if(thirdhighest <= total)
+          {
+            thirdhighest = total;
+          }
+          total = 0;
+        }
   } 
 
   std::cout << currentmaximum << "\n";
