@@ -1,0 +1,75 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main() {
+  int length{};
+  std::string myNum;
+  int myInt{};
+  std::string mynum;
+  int total{};
+
+std::ifstream NumFile;
+NumFile.open("test.txt");
+ int z{};
+  while(std::getline(NumFile, myNum))
+    ++length;
+
+  int* array{ new int[length]{} };
+  
+/* for(int i = 0; i < length; ++i)
+    {
+      std::cout << array[i] << "\n";
+    } */
+NumFile.close();
+NumFile.open("test.txt");
+for(int z = 0; z < length; ++z)
+    {
+      std::getline(NumFile, mynum);
+      if(mynum.empty() == 0)
+      {
+      myInt = stoi(mynum);
+      array[z] = myInt; 
+      }
+      else if(mynum.empty() == 1)
+      {
+        array[z] = 0;
+      }
+    }
+
+ /* for(int i = 0; i < length; ++i)
+    {
+      std::cout << array[i] << "\n";
+    } */
+  int currentmaximum{};
+  int secondhighest{};
+  int thirdhighest{};
+  for(int i = 0; i < length; ++i)
+  {
+        total += array[i];
+        if(array[i] == 0)
+        {
+          if(currentmaximum < total)
+          {
+            currentmaximum = total;
+          }
+          else if(secondhighest < total)
+          {
+            secondhighest = total;
+          }
+          else if(thirdhighest < total)
+          {
+            thirdhighest = total;
+          }
+          total = 0;
+        }
+      
+  } 
+
+  std::cout << currentmaximum << "\n";
+  std::cout << secondhighest << "\n";
+  std::cout << thirdhighest << "\n";
+  total = currentmaximum + secondhighest + thirdhighest;
+  std::cout << total;
+ return 0;
+}
