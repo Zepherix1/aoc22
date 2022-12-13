@@ -1,0 +1,57 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include <string.h>
+#include <algorithm>
+#include <bits/stdc++.h>
+#include <cctype>
+int main()
+{
+  std::string content;
+ std::ifstream sackcontent;
+  sackcontent.open("sack.txt");
+ int i{};
+  std::vector<std::string> sackdata1;
+      sackdata1.resize(301);
+  while(std::getline(sackcontent, content))
+    {
+      sackdata1.at(i) = content;
+      ++i;
+    }
+  std::vector<std::string> sackdata2;
+  sackdata2 = sackdata1;
+  std::vector<std::string> sackcut1;
+  std::vector<std::string> sackcut2;
+      sackcut1.resize(301);
+      sackcut2.resize(301);
+for(i = 0; i < sackdata1.size(); ++i)
+   {
+     sackcut1.at(i) = sackdata1.at(i).substr(0, sackdata1.at(i).size()/2);
+     sackcut2.at(i) = sackdata2.at(i).substr(sackdata2.at(i).size()/2, sackdata2.at(i).size());
+   }
+  std::vector<char> stor;
+int result{};
+for(i = 0; i <sackdata1.size(); ++i)
+  {
+    std::string temp1 = sackcut1.at(i);
+    std::string temp2 = sackcut2.at(i);
+ std::set<char> set1(temp1.begin(), temp1.end());
+  std::set<char> set2(temp2.begin(), temp2.end());
+
+
+  std::set<char> intersection;
+  std::set_intersection(set1.begin(), set1.end(), set2.begin(), set2.end(), inserter(intersection, intersection.begin()));
+
+
+  for (const auto& c : intersection) {
+    if(isupper(c))
+      result = result + c - 38;
+    else
+      result = result + c - 96;
+  }
+    }
+std::cout << result;
+
+  return 0;
+}
